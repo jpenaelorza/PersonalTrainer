@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/pageFragments :: head (pageTitle='Sesion')">
+</head>
+<body>
+	<!-- Cabecera -->
+	<header th:replace="fragments/pageFragments :: header"> </header>
+	<!-- 
+	<div class="grid-x">
+		<div class="cell small-1"></div>
+		<div class="cell small-8">
+			<form action="#" th:action="@{/addPerson}" th:object="${greeting}"
+				method="post">
+				<input type="text">
+				<button type="button" class="button">Agregar</button>
+			</form>
+		</div>
+	</div>
+	<input type="text" class="span2" value="02/16/12" data-date-format="mm/dd/yy" id="dp2">
+	 -->
+	 
+	 
+	 
+	<div class="grid-container">
+		<div class="grid-x">
+			<div class="small-12 medium-5 cell">
+				<h5>
+					<span th:if="${training.idTraining == null}">Nuevo </span>Entrenamiento:
+				</h5>
+				<br>
+
+				<form action="#"
+					th:action="|/person/${person.idPerson}/addtraining|"
+					th:object="${training}" method="post">
+					<div class="grid-x grid-padding-x">
+						<div class="small-3 cell">
+							<label class="text-right middle">Entrenamiento:</label>
+						</div>
+						<div class="small-5 cell">
+							<input type="text" th:field="*{name}"
+								th:placeholder="'Perder peso'" />
+						</div>
+					</div>
+
+					<div class="grid-x grid-padding-x">
+						<div class="small-3 cell">
+							<label class="text-right middle">Descripcion:</label>
+						</div>
+						<div class="small-7 cell">
+							<input type="text" th:field="*{description}"
+								th:placeholder="'Soltar toda la chapa'" />
+						</div>
+					</div>
+
+					<div class="grid-x grid-padding-x">
+						<div class="small-3 cell">
+							<label class="text-right middle">Tipo:</label>
+						</div>
+						<div class="small-5 cell">
+							<select th:field="*{trainingType}">
+								<option th:value="PRESENCIAL">PRESENCIAL</option>
+								<option th:value="ONLINE">ONLINE</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="grid-x grid-padding-x">
+						<div class="small-3 cell">
+							<label class="text-right middle">Sesiones:</label>
+						</div>
+						<div class="small-7 cell">
+							<input type="number" th:field="*{sessionsNumber}"
+								th:placeholder="'1'" />
+						</div>
+					</div>
+					<input type="hidden" th:field="*{idTraining}"> <br>
+					<div class="grid-x grid-padding-x">
+
+						<div class="small-2 cell">
+							<a th:href="|/person/${person.idPerson}|" class="button">Volver</a>
+						</div>
+						<div class="small-2 cell">
+							<input th:if="${training.idTraining == null}" type="submit"
+								class="button" value="Agregar" /> <input
+								th:unless="${training.idTraining == null}" type="submit"
+								class="button" value="Modificar" />
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="medium-1 cell">
+				<hr class="vertical-line hide-for-small-only">
+			</div>
+			<div class="small-12 medium-6 cell">
+				<div class="grid-container medium-grid-frame" style="height: 100%;">
+					<div class="grid-y " style="height: 100%;">
+						<div class="cell small-10">
+							<h5>Sesion</h5>
+							<form action="#"
+								th:action="|/person/${person.idPerson}/training/${training.idTraining}/session|"
+								th:object="${sesion}" method="post">
+								<div class="grid-x grid-padding-x">
+									<div class="small-2 cell">
+										<label class="text-right middle">Numero:</label>
+									</div>
+									<div class="small-4 cell">
+										<input type="number" th:field="*{sessionNumber}" />
+									</div>
+								</div>
+
+								<div class="grid-x grid-padding-x">
+									<div class="small-2 cell">
+										<label class="text-right middle">Fecha:</label>
+									</div>
+									<div class="small-6 cell">
+										<input type="text" id="dp2" th:field="*{date}"
+											data-date-format="dd/mm/yyyy"
+											th:placeholder="'02/12/2018'" autocomplete="off" />
+									</div>
+								</div>
+
+								<div class="grid-x grid-padding-x">
+									<div class="small-2 cell">
+										<label class="text-right middle">Descripcion:</label>
+									</div>
+									<div class="small-4 cell">
+										<input type="text" th:field="*{description}"
+											th:placeholder="'Hoy a mover hierro'" />
+									</div>
+								</div>
+
+								<div class="grid-x grid-padding-x">
+									<div class="small-2 cell">
+										<label class="text-right middle">Comentarios:</label>
+									</div>
+									<div class="small-6 cell">
+										<input type="text" th:field="*{comments}"
+											th:placeholder="'No tiene chicha'" />
+									</div>
+								</div>
+								<input type="hidden" th:field="*{idSession}"> <br>
+								<div class="grid-x grid-padding-x">
+
+									<div class="small-2 cell">
+										<a
+											th:href="|/person/${person.idPerson}/training/${training.idTraining}|"
+											class="button">Volver</a>
+									</div>
+									<div class="small-2 cell">
+										<input th:if="${sesion.idSession == null}" type="submit"
+											class="button" value="Agregar" /> <input
+											th:unless="${sesion.idSession == null}" type="submit"
+											class="button" value="Modificar" />
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="cell small-2 align-bottom">
+							<!-- 		<a
+								th:href="|/person/${person.idPerson}/training/${idTraining}/session|"
+							class="button">Agregar Sesion</a>  -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="fragments/pageFragments :: footer"></div>
+	<!-- Scripts -->
+	<div th:replace="fragments/pageFragments :: scripts"></div>
+
+	<script>
+		$(function() {
+			$('#dp2').fdatepicker({
+				closeButton : true
+			});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head
+	th:replace="fragments/pageFragments :: head (pageTitle='Usuarios')">
+</head>
+<body>
+	<header th:replace="fragments/pageFragments :: header"> </header>
+	
+	<div class="grid-container">
+		<div class="grid-x">
+			<div class="cell small-8">
+				<table>
+					<tr>
+						<th class="text-left">Nombre</th>
+						<th class="text-left">Apellido</th>
+						<th class="text-left">Telefono</th>
+						<th class="text-left">Email</th>
+					</tr>
+					<th:block th:each="person : ${personPage.content}">
+						<tr>
+							<td><a th:href="|/person/${person.idPerson}|"
+								th:text="${person.name}">Name</a></td>
+							<td th:text="${person.surname}" />
+							<td th:text="${person.phone}" />
+							<td th:text="${person.email}" />
+						</tr>
+					</th:block>
+				</table>
+			</div>
+		</div>
+		<div class="grid-x">
+			<div class="cell small-2">
+				<a th:href="@{/person}" class="button">Agregar</a>
+			</div>
+		</div>
+		<div th:if="${personPage.totalPages > 1}">
+			<nav aria-label="Pagination">
+				<ul class="pagination">
+					<li class="pagination-previous"
+						th:classappend="${page == 1 ? 'disabled' : ''}"><a
+						th:if="${page > 1}"
+						th:classappend="${page == 1 ? 'disabled' : ''}"
+						th:href="|/persons?size=10&page=${page - 1}|"
+						aria-label="Pagina anterior"> <span class="show-for-sr">page</span><span
+							th:if="${page > 1}">Anterior</span></a><span th:if="${page == 1}">Anterior</span></li>
+					<th:block th:each="pageNumber : ${pageNumbers}">
+						<li><a th:href="|/persons?size=10&page=${pageNumber}|"
+							th:attr="aria-label=|Page ${pageNumber}|" th:text="${pageNumber}"
+							th:classappend="${page == pageNumber ? 'current' : ''}">Number</a></li>
+					</th:block>
+
+					<li class="pagination-next"
+						th:classappend="${page == personPage.totalPages ? 'disabled' : ''}"><a
+						th:if="${page != personPage.totalPages}"
+						th:classappend="${page == personPage.totalPages ? 'disabled' : ''}"
+						th:href="|/persons?size=10&page=${page + 1}|"
+						aria-label="Pagina siguiente"><span class="show-for-sr">page</span><span
+							th:if="${page != personPage.totalPages}">Siguiente</span></a><span
+						th:if="${page == personPage.totalPages}">Siguiente</span></li>
+					<!-- 
+				<li class="current"><span class="show-for-sr">You're on
+						page</span> 1</li>
+				<li><a href="#" aria-label="Page 2">2</a></li>
+				<li><a href="#" aria-label="Page 3">3</a></li>
+				<li><a href="#" aria-label="Page 4">4</a></li>
+				<li class="ellipsis" aria-hidden="true"></li>
+				<li><a href="#" aria-label="Page 12">12</a></li>
+				<li><a href="#" aria-label="Page 13">13</a></li>
+				<li class="pagination-next"><a href="#" aria-label="Next page">Next
+						<span class="show-for-sr">page</span>
+				</a></li>
+				-->
+				</ul>
+			</nav>
+		</div>
+
+	</div>
+
+
+	<div th:replace="fragments/pageFragments :: footer"></div>
+
+	<div th:replace="fragments/pageFragments :: scripts"></div>
+	
+	
+
+</body>
+</html>

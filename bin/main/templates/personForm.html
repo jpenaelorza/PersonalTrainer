@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head
+	th:replace="fragments/pageFragments :: head (pageTitle='Usuarios')">
+</head>
+<body>
+	<!-- Cabecera -->
+	<header th:replace="fragments/pageFragments :: header"> </header>
+	<!-- 
+	<div class="grid-x">
+		<div class="cell small-1"></div>
+		<div class="cell small-8">
+			<form action="#" th:action="@{/addPerson}" th:object="${greeting}"
+				method="post">
+				<input type="text">
+				<button type="button" class="button">Agregar</button>
+			</form>
+		</div>
+	</div>
+	
+	 -->
+	<div class="grid-container">
+		<div class="grid-x">
+			<div class="small-12 medium-5 cell">
+				<h5>
+					<span th:if="${person.idPerson == null}">Nuevo </span>Usuario:
+				</h5>
+				<br>
+
+				<form action="#" th:action="@{/addperson}" th:object="${person}"
+					method="post">
+					<div class="grid-x grid-padding-x">
+						<div class="small-2 cell">
+							<label class="text-right middle">Nombre:</label>
+						</div>
+						<div class="small-4 cell">
+							<input type="text" th:field="*{name}" th:placeholder="Pepito" />
+						</div>
+					</div>
+
+					<div class="grid-x grid-padding-x">
+						<div class="small-2 cell">
+							<label class="text-right middle">Apellidos:</label>
+						</div>
+						<div class="small-6 cell">
+							<input type="text" th:field="*{surname}" th:placeholder="Grillo" />
+						</div>
+					</div>
+
+					<div class="grid-x grid-padding-x">
+						<div class="small-2 cell">
+							<label class="text-right middle">Telefono:</label>
+						</div>
+						<div class="small-4 cell">
+							<input type="tel" th:field="*{phone}" th:placeholder="666666666" />
+						</div>
+					</div>
+
+					<div class="grid-x grid-padding-x">
+						<div class="small-2 cell">
+							<label class="text-right middle">Email:</label>
+						</div>
+						<div class="small-6 cell">
+							<input type="email" th:field="*{email}"
+								th:placeholder="'pepito@yahoo.es'" />
+						</div>
+					</div>
+					<input type="hidden" th:field="*{idPerson}"> <br>
+					<div class="grid-x grid-padding-x">
+
+						<div class="small-2 cell">
+							<a th:href="@{/persons?size=10&page=1}" class="button">Volver</a>
+						</div>
+						<div class="small-2 cell">
+							<input th:if="${person.idPerson == null}" type="submit"
+								class="button" value="Agregar" /> <input
+								th:unless="${person.idPerson == null}" type="submit"
+								class="button" value="Modificar" />
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="medium-1 cell">
+				<hr class="vertical-line hide-for-small-only">
+			</div>
+			<div class="small-12 medium-6 cell">
+				<div class="grid-container medium-grid-frame" style="height: 100%;">
+					<div class="grid-y " style="height: 100%;">
+						<div class="cell small-10">
+							<h5>Entrenamientos</h5>
+							<table>
+								<tr>
+									<th class="text-left">Nombre</th>
+									<th class="text-left">Inicio</th>
+									<th class="text-left">Sesiones</th>
+									<th class="text-left">Fin</th>
+								</tr>
+								<th:block th:each="training : ${trainings}">
+									<tr>
+										<td><a th:href="|/person/${person.idPerson}/training/${training.idTraining}|"
+											th:text="${training.name}">Name</a></td>
+										<td th:text="${training.startDate}" />
+										<td th:text="${training.sessionsNumber}" />
+
+									</tr>
+								</th:block>
+							</table>
+						</div>
+						<div class="cell small-2 align-bottom">
+							<a th:href="|/person/${person.idPerson}/training|" class="button">Nuevo
+								Entrenamiento</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="fragments/pageFragments :: footer"></div>
+	<!-- Scripts -->
+	<div th:replace="fragments/pageFragments :: scripts"></div>
+</body>
+</html>
